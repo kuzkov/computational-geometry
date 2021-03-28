@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+lab3/lib/
 lib64/
 parts/
 sdist/

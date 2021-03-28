@@ -68,6 +68,7 @@ def renderText(sc, message, p):
     text = FONT.render(message, False, (0, 0, 0))
     sc.blit(text, (p[0] + 5, p[1] + 5))
 
+
 def next(i):
     return (i + 1) % len(polygon)
 

@@ -57,6 +57,7 @@ else:
     else:
         print("Do not intersect")
 
+
 def renderText(sc, message, p):
     text = FONT.render(message, False, (0, 0, 0))
     sc.blit(text, (p[0] + 5, p[1] + 5))
