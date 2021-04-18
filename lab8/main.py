@@ -44,16 +44,6 @@ Q = ConvexPolygon([
     (450, 600)
 ])
 
-# Update
-for i in range(len(P.points)):
-    P.points[i].x += 150
-    P.points[i].y += 150
-
-for i in range(len(Q.points)):
-    Q.points[i].x -= 150
-    Q.points[i].y -= 150
-
-
 def render_text(sc, message, p):
     text = FONT.render(message, False, (0, 0, 0))
     sc.blit(text, (p[0] + 5, p[1] + 5))
@@ -68,7 +58,16 @@ while RUNNING:
 
     sc.fill(WHITE)
 
-    # R = P.clip_polygon(Q)
+    # Update
+    for i in range(len(P.points)):
+        P.points[i].x += 1
+        P.points[i].y += 1
+
+    for i in range(len(Q.points)):
+        Q.points[i].x -= 1
+        Q.points[i].y -= 1
+
+    R = P.clip_polygon(Q)
 
     # Drap segment
 
@@ -89,12 +88,13 @@ while RUNNING:
         pygame.draw.line(sc, BLACK, point.tolist(), Q.points[next(len(Q.points), index)].tolist(), 1)
     pygame.draw.line(sc, BLACK, Q.points[len(Q.points) - 1].tolist(), Q.points[0].tolist(), 1)
 
-    # if len(R.points) > 1:
-    #     pygame.draw.polygon(sc, RED, list(map(lambda point: point.tolist(), R.points)))
+    if len(R.points) > 1:
+        pygame.draw.polygon(sc, RED, list(map(lambda point: point.tolist(), R.points)))
 
     clipped_segment = Q.clip_segment(segment)
 
-    pygame.draw.line(sc, BLUE, clipped_segment.p1.tolist(), clipped_segment.p2.tolist(), 5)
+    if clipped_segment is not None:
+        pygame.draw.line(sc, BLUE, clipped_segment.p1.tolist(), clipped_segment.p2.tolist(), 5)
 
     pygame.display.update()
 

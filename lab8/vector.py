@@ -28,6 +28,9 @@ class Vector:
     def get_right_normal(self):
         return Vector(self.y, -self.x)
 
+    def get_left_normal(self):
+        return Vector(-self.y, self.x)
+
     @classmethod
     def mult(cls, v, k):
         return Vector(v.x * k, v.y * k)

@@ -97,10 +97,8 @@ class ConvexPolygon(Polygon):
 
         if (p.aimAt(q) and q.aimAt(p)) or (not p.aimAt(q) and not q.aimAt(p)) or p.is_collinear_to(q):
             if q.p2.direction(p) >= 0: # q.p2 is on the right of p
-                print(q.p2.direction(p))
                 advanceq = True
             elif p.p2.direction(q) >= 0:
-                print(p.p2.direction(q))
                 advancep = True
         elif p.aimAt(q):
             advancep = True
@@ -130,7 +128,7 @@ class ConvexPolygon(Polygon):
             p1 = self.points[i]
             p2 = self.points[(i + 1) % size]
 
-            n = Segment(p1, p2).as_vector().get_right_normal()
+            n = Segment(p1, p2).as_vector().get_left_normal()
             W = Segment(p1, e1).as_vector()
 
             if math.isclose(Vector.dot(D, n), 0):
@@ -138,15 +136,13 @@ class ConvexPolygon(Polygon):
 
             t = - Vector.dot(W, n) / Vector.dot(D, n)
 
-            if not 0 <= t <= 1:
-                continue
-
-
-
             if Vector.dot(n, D) > 0:  # Отрезок выходит из полигона
                 if t < max_p: max_p = t
             else:  # Отрезок входит в полигон
                 if t > min_p: min_p = t
+
+        if max_p <= min_p:
+            return None
 
         p1 = Vector.add(e1, Vector.mult(Vector.subtract(e2, e1), min_p))
         p2 = Vector.add(e1, Vector.mult(Vector.subtract(e2, e1), max_p))
