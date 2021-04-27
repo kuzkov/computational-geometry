@@ -60,12 +60,12 @@ while RUNNING:
 
     # Update
     for i in range(len(P.points)):
-        P.points[i].x += 1
-        P.points[i].y += 1
+        P.points[i].x += 1.2
+        P.points[i].y += 0.8
 
     for i in range(len(Q.points)):
-        Q.points[i].x -= 1
-        Q.points[i].y -= 1
+        Q.points[i].x -= 0.8
+        Q.points[i].y -= 1.2
 
     R = P.clip_polygon(Q)
 
